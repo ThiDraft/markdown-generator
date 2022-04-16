@@ -24,4 +24,4 @@ class LinkTest(MarkdownTestCase):
     def test_valid_link_with_text(self):
         url = 'example.com'
         text = 'see example'
-        self.assertEqual(link(url, text), '[{}]({})'.format(text, url))
+        self.assertEqual(link(url, text), f'[{text}]({url})')

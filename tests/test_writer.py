@@ -79,4 +79,4 @@ class WriterTest(unittest.TestCase):
 
     def test_write_hrule(self):
         self.writer.write_hrule()
-        self.assertReadEqual('---' + linesep)
+        self.assertReadEqual(f'---{linesep}')

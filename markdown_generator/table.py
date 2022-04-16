@@ -21,21 +21,21 @@ class Table(object):
         return ' | '.join([''] + [str(f) for f in fields] + ['']).strip()
 
     def __str__(self):
-        if self.columns:
-            titleRow = '|'
-            separatorRow = '|'
-            for column in self.columns:
-                titleRow += ' {} |'.format(column.heading)
-                separatorRow += '{}---{}|'.format(
-                    ':' if bool(Alignment.LEFT & column.alignment) else ' ',
-                    ':' if bool(Alignment.RIGHT & column.alignment) else ' '
-                )
-            result = '{}\n{}\n'.format(titleRow, separatorRow)
-            result += '\n'.join(map(self.format_row, self.entries))
-            if self.entries:
-                result += '\n'
-            return result + '\n'
-        return ''
+        if not self.columns:
+            return ''
+        titleRow = '|'
+        separatorRow = '|'
+        for column in self.columns:
+            titleRow += f' {column.heading} |'
+            separatorRow += f"{':' if bool(Alignment.LEFT & column.alignment) else ' '}---{':' if bool(Alignment.RIGHT & column.alignment) else ' '}|"
+
+        result = '{}\n{}\n'.format(titleRow, separatorRow) + '\n'.join(
+            map(self.format_row, self.entries)
+        )
+
+        if self.entries:
+            result += '\n'
+        return result + '\n'
 
 
 class Column(object):

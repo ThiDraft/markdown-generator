@@ -4,8 +4,10 @@ class Image(object):
         self.alt_text = alt_text
 
     def __str__(self):
-        if not self.img_url:
-            return ''
-        return '![{}]({})'.format(('' if self.alt_text is None
-                                   else self.alt_text),
-                                  self.img_url)
+        return (
+            '![{}]({})'.format(
+                ('' if self.alt_text is None else self.alt_text), self.img_url
+            )
+            if self.img_url
+            else ''
+        )

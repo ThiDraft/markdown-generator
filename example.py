@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
         writer.write_heading('heading1')
         for i in range(2, 7):
-            writer.write_heading('heading{}'.format(i), i)
+            writer.write_heading(f'heading{i}', i)
 
         writer.writeline(mg.emphasis('emphasis'))
         writer.writeline(mg.strong('strong'))
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         table.add_column('col2', mg.Alignment.CENTER)
         table.add_column('col3', 2)
         for i in range(3):
-            table.append(*['e{}f{}'.format(i, j) for j in range(3)])
+            table.append(*[f'e{i}f{j}' for j in range(3)])
         table.append()
         table.append(mg.strong('e5f1'), image)
         writer.write(table)
