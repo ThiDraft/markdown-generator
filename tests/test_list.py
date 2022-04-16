@@ -18,7 +18,7 @@ class UnorderedListTest(MarkdownTestCase):
 
     def test_list_with_multiple_items(self):
         lst = List()
-        items = ['item{}'.format(i) for i in range(3)]
+        items = [f'item{i}' for i in range(3)]
         [lst.append(x) for x in items]
         expected = '* ' + '\n* '.join(items) + '\n\n'
         self.assertRenderedEqual(lst, expected)
@@ -35,9 +35,9 @@ class OrderedListTest(MarkdownTestCase):
 
     def test_list_with_multiple_items(self):
         lst = OrderedList()
-        items = ['item{}'.format(i) for i in range(3)]
+        items = [f'item{i}' for i in range(3)]
         [lst.append(x) for x in items]
-        items = ['{}. {}'.format(i + 1, x) for i, x in enumerate(items)]
+        items = [f'{i + 1}. {x}' for i, x in enumerate(items)]
         expected = '\n'.join(items) + '\n\n'
         self.assertRenderedEqual(lst, expected)
 
@@ -58,21 +58,21 @@ class CheckListTest(MarkdownTestCase):
 
     def test_multiple_items(self):
         lst = CheckList()
-        items = ['item{}'.format(i) for i in range(3)]
+        items = [f'item{i}' for i in range(3)]
         [lst.append(x) for x in items]
         expected = ''.join('- [ ] {}\n'.format(x) for x in items) + '\n'
         self.assertRenderedEqual(lst, expected)
 
     def test_multiple_items_checked(self):
         lst = CheckList()
-        items = ['item{}'.format(i) for i in range(3)]
+        items = [f'item{i}' for i in range(3)]
         [lst.append(x, True) for x in items]
         expected = ''.join('- [x] {}\n'.format(x) for x in items) + '\n'
         self.assertRenderedEqual(lst, expected)
 
     def test_multiple_items_mixed(self):
         lst = CheckList()
-        items = [('item{}'.format(i), i % 2 == 0) for i in range(3)]
+        items = [(f'item{i}', i % 2 == 0) for i in range(3)]
         [lst.append(*x) for x in items]
         items = ((x, 'x' if y else ' ') for x, y in items)
         expected = ''.join('- [{}] {}\n'.format(x, y) for y, x in items) + '\n'

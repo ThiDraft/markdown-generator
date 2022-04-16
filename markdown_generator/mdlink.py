@@ -1,6 +1,4 @@
 def link(url, text=None):
     if url:
-        if text:
-            return '[{}]({})'.format(text, url)
-        return url
+        return f'[{text}]({url})' if text else url
     return ''

@@ -19,7 +19,7 @@ def create_test_data(scols='', rows=0):
     output = ''
     if cols:
         output += '| '
-        output += ' | '.join('c{}'.format(i) for i, _ in enumerate(cols))
+        output += ' | '.join(f'c{i}' for i, _ in enumerate(cols))
         output += ' |\n'
         for col in cols:
             output += '|'
@@ -29,14 +29,14 @@ def create_test_data(scols='', rows=0):
         output += '|\n'
         for r in range(rows):
             for c, _ in enumerate(cols):
-                output += '| {},{} '.format(r, c)
+                output += f'| {r},{c} '
             output += '|\n'
         output += '\n'
     return Data(
-        '{}{}'.format(scols, rows) if scols else 'Empty',
+        f'{scols}{rows}' if scols else 'Empty',
         columns=cols,
         rows=rows,
-        expected=output
+        expected=output,
     )
 
 
@@ -62,9 +62,9 @@ class TableTest(MarkdownTestCase):
             columns = []
         table = Table()
         for i, col_align in enumerate(columns):
-            table.add_column('c{}'.format(i), col_align)
+            table.add_column(f'c{i}', col_align)
         for r in range(rows):
-            table.append(*('{},{}'.format(r, c) for c in range(len(columns))))
+            table.append(*(f'{r},{c}' for c in range(len(columns))))
         self.assertRenderedEqual(table, expected)
 
     def test_error_append_no_columns(self):
